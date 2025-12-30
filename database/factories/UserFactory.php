@@ -42,4 +42,11 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function withValidBirthDate(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'birth_date' => fake()->dateTimeBetween('1980-01-01', '2010-12-31')->format('Y-m-d'),
+        ]);
+    }
 }

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('report_link');
+            $table->string('report_link')->nullable();
+            $table->json('filter_params')->nullable();
             $table->enum('status', ['pending', 'processing', 'completed', 'failed'])->default('pending');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
