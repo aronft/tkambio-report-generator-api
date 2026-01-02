@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthLoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -12,9 +13,13 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
+        if (!$user) {
+            return response()->json(['message' => 'Error al iniciar sesión. Credenciales incorrectas.'], 401);
+        }
+
         $canCheckHashedCredentials = Hash::check($request->password, $user->password);
         if (!$user || !$canCheckHashedCredentials) {
-            return response()->json(['message' => 'Error al iniciar sesión. Credenciales incorrectas'], 401);
+            return response()->json(['message' => 'Error al iniciar sesión. Credenciales incorrectas.'], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -22,6 +27,14 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'user' => [
+                'name' => $user->name,
+            ]
         ]);
+    }
+
+    public function me(Request $request)
+    {
+        return response()->json($request->user());
     }
 }

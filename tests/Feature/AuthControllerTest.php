@@ -13,9 +13,9 @@ describe('AuthControllerTest', function () {
             'password' => env('ADMIN_PASSWORD', 'admin12345')
         ]);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/auth/login', [
             'email' => $user->email,
-            'password' => env('ADMIN_PASSWORD', 'admin12345')
+            'password' => env('USER_TEST_PASSWORD', 'tkambio12345')
         ]);
 
         $response->assertStatus(200)
