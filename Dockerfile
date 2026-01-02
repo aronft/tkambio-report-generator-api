@@ -24,4 +24,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 EXPOSE 80
 
-CMD php artisan migrate --seed --force && php artisan storage:link && service nginx start && php-fpm
+CMD php artisan migrate --force && php artisan storage:link && service nginx start && php-fpm -F
