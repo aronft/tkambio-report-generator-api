@@ -11,8 +11,8 @@ This is the backend for the Tkambio Full Stack challenge that implements an asyn
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone <your-repo-link>
-cd tkambio-challenge-backend
+git clone https://github.com/aronft/tkambio-report-generator-api
+cd tkambio-report-generator-api
 
 # Install dependencies
 composer install
@@ -29,7 +29,16 @@ cp .env.example .env
 
 ## Usage
 
-To see the system in action, follow these steps in order:
+### Credentials
+
+config `.env` credentials or use defaults:
+
+```bash
+email: user@tkambio.com
+password: admin12345
+```
+
+Follow the steps below to get started:
 
 ### 1. Database & Seeders
 Run the migrations and seed the database with test users.
@@ -44,8 +53,6 @@ Since report generation is asynchronous, you must start the queue worker to proc
 ```Bash
 ./vendor/bin/sail artisan queue:work
 ```
-
-> Note: Keep this terminal open or run it in the background to process the reports triggered via API.
 
 ### 3. Storage Link
 Make sure the exported files are accessible via the web.
@@ -65,3 +72,8 @@ Key Endpoints
 
 - `Accept: application/json`
 - `Authorization: Bearer <your_token>`
+
+## Repositories
+1. **Frontend:** [https://github.com/aronft/tkambio-report-generator-web]
+2. **Backend:** [https://github.com/aronft/tkambio-report-generator-api]
+3. **Static Demo:** [https://github.com/aronft/tkambio-report-generator-mock]
